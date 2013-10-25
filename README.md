@@ -1,6 +1,6 @@
 
-CARNOT ENGINE v01.02 README
-===========================
+CARNOT REFRIGERATOR v01.05 README
+=================================
 
 Language
 --------
@@ -44,7 +44,7 @@ Adjusting Parameters
 --------------------
 
   You can adjust the temperatures of the thermal reservoirs as well as the
-  heat energy flow rate from the warmer reservoir. To do so, change the
+  heat energy flow rate from the cooler reservoir. To do so, change the
   parameters in the "# Initialize simulation parameters" section of the 
   source code. You will need a text editor for this.
 
