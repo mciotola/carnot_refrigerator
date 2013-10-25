@@ -26,12 +26,13 @@ puts "\n\n"
 
 puts "================================== Background =================================\n\n"
   
-puts " A refrigerator moves heat from a cooler reservoir to a warmer one."
-puts " A Carnot refrigerator doe so at maximum possible efficiency as "
-puts " constrained by the Second Law of Thermodynamics. "
-puts "\n\n"
-puts " Coefficient of performance (COP) efficiency = 1 - (T cold/T hot), where T is temperature. \n\n"  
-puts " Work = Carnot efficiency * heat energy flow from warmer reservoir.  \n"  
+puts " Work is inputted upon a refrigerator moves heat from a cooler reservoir to a "
+puts " a warmer reservoir.  A Carnot refrigerator does so at maximum possible"
+puts " efficiency as constrained by the Second Law of Thermodynamics.  Here, "
+puts " efficiency is called the Coefficient of performance (COP)."
+puts "\n"
+puts "   COP = T cold/(T cold/T hot), where T is temperature.\n\n"  
+puts "   Heat removed from the cooler reservoir = work * COP.  \n"  
 puts "\n"
 puts " All temperatures should be units of Kelvin (or K), which is the "
 puts " temperature in Celsius + 273.15. 0K is absolute zero. \n"  
@@ -49,9 +50,9 @@ puts "\n\n"
   # You can adjust them, as long as both temperatures are positive. A decimal point 
   # must be added to tell Ruby to allow floating point calculations.
 
-  warmertemp = 500.0  # in K
+  warmertemp = 400.0  # in K
   coolertemp = 300.0  # K
-  flowtowarmresv = 100.0  # J/s
+  work = 1.0  # J
   
 
 # Display the parameters 
@@ -60,7 +61,7 @@ puts "\n\n"
 
   puts sprintf "                  Warmer temp: \t %7.3f %s", warmertemp.to_s, " K"
   puts sprintf "                  Cooler temp: \t %7.3f %s", coolertemp.to_s, " K"
-  puts sprintf "     Heat energy flow to warm: \t %7.3f %s", flowtowarmresv.to_s, " J/s"
+  puts sprintf "                         Work: \t %7.3f %s", work.to_s, " J"
   puts "\n\n"  
 
 # Run the simulation 
@@ -69,26 +70,22 @@ puts "\n\n"
   
   coefficientofperformance = coolertemp/(warmertemp - coolertemp)
   
-
-
+  flowfromcoolresv = work * coefficientofperformance
+  flowtowarmresv = flowfromcoolresv + work
   
-  coefficientpercent = coefficientofperformance * 100.0
-  workneeded = coefficientofperformance/flowtowarmresv
-  flowfromcoolresv = flowtowarmresv - workneeded
-  
-  entropychangehot = (flowtowarmresv/warmertemp)
+  entropychangewarm = (flowtowarmresv/warmertemp)
   entropychangecool = - (flowfromcoolresv/coolertemp)
-  entropyincrease = entropychangehot + entropychangecool
+  entropyincrease = entropychangewarm + entropychangecool
 
 # Display the output 
 
   puts "==================================== Output ===================================\n\n"
 
-  puts sprintf "                    Temp diff: \t %7.3f %s" , tempdiff.to_s,  " K"	
-  puts sprintf "   Coefficient of Performance: \t %7.3f %s" , coefficientpercent.to_s,  " %"
-  puts sprintf "                  Work Needed: \t%7.3f %s" , workneeded.to_s, " J/s"
+  puts sprintf "              Temp difference: \t %7.3f %s" , tempdiff.to_s,  " K"	
+  puts sprintf "   Coefficient of Performance: \t %7.3f   " , coefficientofperformance.to_s
+  puts sprintf "                  Work Needed: \t %7.3f %s" , work.to_s, " J/s"
   puts sprintf "               Flow from cool: \t %7.3f %s" , flowtowarmresv.to_s, " J/s"
-  puts sprintf "    Entropy removed from warm: \t %7.3f %s" , entropychangehot.to_s, " J/K/s"
+  puts sprintf "    Entropy removed from warm: \t %7.3f %s" , entropychangewarm.to_s, " J/K/s"
   puts sprintf "        Entropy added to cool: \t %7.3f %s" , entropychangecool.to_s, " J/K/s"
   puts sprintf "     Entropy change of system: \t %7.3f %s" , entropyincrease.to_s, " J/K/s"
 
@@ -106,7 +103,12 @@ puts "\n\n"
 
   puts "================================== Reference ==================================\n\n"
   puts "Daniel V. Schroeder, 2000, \"An Introduction to Thermal Physics.\""
+  puts "\n\n"
 
+  puts "==================================== Note =====================================\n\n"
+  puts "The number of significant digits shown is arbitrary. In reality, it would "
+  puts "depend upon the accuracy of the inputted data."
+  puts "\n\n"
 
 
 

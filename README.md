@@ -60,7 +60,7 @@ Troubleshooting
   
   If you adjusted the parameters, make sure all are positive and have decimal
   point. Also make sure that you saved the file in a pure text format and that
-  the filenake ends in ".rb"
+  the file name ends in ".rb"
   
   
 Copyright and Use Notice
